@@ -21,10 +21,15 @@ metadata:
     app: train-schedule
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: train-schedule
+      track: stable
   template:
     metadata:
       labels:
         app: train-schedule
+        track: stable
     spec:
       containers:
       - name: train-schedule
