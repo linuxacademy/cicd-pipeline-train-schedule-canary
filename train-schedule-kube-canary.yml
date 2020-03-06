@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: train-schedule
+    app: trainschedule
     track: canary
   ports:
   - protocol: TCP
@@ -19,21 +19,21 @@ kind: Deployment
 metadata:
   name: train-schedule-deployment-canary
   labels:
-    app: train-schedule
+    app: trainschedule
 spec:
   replicas: $CANARY_REPLICAS
   selector:
     matchLabels:
-      app: train-schedule
+      app: trainschedule
       track: canary
   template:
     metadata:
       labels:
-        app: train-schedule
+        app: trainschedule
         track: canary
     spec:
       containers:
-      - name: train-schedule
+      - name: trainschedule
         image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         ports:
         - containerPort: 8080
