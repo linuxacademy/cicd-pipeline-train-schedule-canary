@@ -43,6 +43,9 @@ pipeline {
              when {
                 branch 'master'
             }
+            environment {
+                 CANARY_REPLICAS = 1
+                    }
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
@@ -58,6 +61,9 @@ pipeline {
             when {
                 branch 'master'
             }
+            environment {
+                  CANARY_REPLICAS = 0
+             }
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
