@@ -17,12 +17,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                script {
-                    app = docker.build(DOCKER_IMAGE_NAME)
-                    app.inside {
-                        sh 'echo Hello, World!'
-                    }
-                }
+                sh 'docker build -t us-central1-docker.pkg.dev/indigo-syntax-375116/acg/train-schedule .'
             }
         }
         stage('Push Docker Image') {
@@ -30,12 +25,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
-                    }
-                }
+                sh 'docker push us-central1-docker.pkg.dev/indigo-syntax-375116/acg/train-schedule'
             }
         }
         stage('DeployToProduction') {
